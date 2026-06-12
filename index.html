@@ -6,7 +6,7 @@
     <title>Live Event Countdown</title>
     <style>
         body {
-            background-color: #333333; /* Exact gray background from your image */
+            background-color: rgb(12, 12, 12); /* New dark background */
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
@@ -31,8 +31,14 @@
         img {
             max-width: 90%;
             width: 720px;
-            border-radius: 12px;
+            border-radius: 0px; /* Removed rounded corners */
             box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+        }
+        .click-hint {
+            color: #ffffff;
+            font-size: 1rem;
+            margin-top: 10px;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -41,12 +47,12 @@
     <h1>Gaming Cinematic Universe deletion live event countdown:</h1>
     <div id="countdown">Loading countdown...</div>
     
-    <!-- GIF Display Box -->
     <div class="gif-container">
         <img src="meme.gif" alt="Live Event Image">
     </div>
 
-    <!-- Background Music Player -->
+    <div class="click-hint">(click me)</div>
+
     <audio id="bgMusic" autoplay loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
