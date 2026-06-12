@@ -6,80 +6,133 @@
     <title>Live Event Countdown</title>
     <style>
         body {
-            background-color: rgb(12, 12, 12); /* New dark background */
+            background-color: rgb(12, 12, 12);
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             text-align: center;
-            padding-top: 40px;
+            padding-top: 60px;
             margin: 0;
+            user-select: none;
         }
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 2.3rem;
+            margin-bottom: 40px;
             font-weight: bold;
+            letter-spacing: 0.5px;
         }
-        #countdown {
+        
+        .countdown-container {
+            display: inline-flex;
+            background-color: #0b0b0b;
+            padding: 20px 40px;
+            border-radius: 4px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.6);
+            gap: 15px;
+            align-items: center;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+
+        .number {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 8px;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+        }
+
+        /* The small muted labels underneath */
+        .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #888888;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .separator {
             font-size: 3.5rem;
             font-weight: bold;
-            color: #ff4757;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
+            color: #333333;
+            line-height: 1;
+            padding-bottom: 25px;
+            font-family: monospace;
         }
-        .gif-container {
-            margin-top: 20px;
-        }
-        img {
-            max-width: 90%;
-            width: 720px;
-            border-radius: 0px; /* Removed rounded corners */
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
-        }
+
         .click-hint {
             color: #ffffff;
             font-size: 1rem;
-            margin-top: 10px;
-            opacity: 0.8;
+            margin-top: 35px;
+            opacity: 0.6;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
     <h1>Gaming Cinematic Universe deletion live event countdown:</h1>
-    <div id="countdown">Loading countdown...</div>
     
-    <div class="gif-container">
-        <img src="meme.gif" alt="Live Event Image">
+    <div class="countdown-container">
+        <div class="time-box">
+            <div class="number" id="days">0</div>
+            <div class="label">Days</div>
+        </div>
+        <div class="separator">:</div>
+        <div class="time-box">
+            <div class="number" id="hours">00</div>
+            <div class="label">Hours</div>
+        </div>
+        <div class="separator">:</div>
+        <div class="time-box">
+            <div class="number" id="minutes">00</div>
+            <div class="label">Minutes</div>
+        </div>
+        <div class="separator">:</div>
+        <div class="time-box">
+            <div class="number" id="seconds">00</div>
+            <div class="label">Seconds</div>
+        </div>
     </div>
 
-    <div class="click-hint">(click me)</div>
+    <div class="click-hint">(click for audio)</div>
 
     <audio id="bgMusic" autoplay loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Set the countdown target to tomorrow at the exact same hour
         const countdownDate = new Date(2026, 5, 13, 21, 33, 0).getTime(); 
 
         const timer = setInterval(function() {
             const now = new Date().getTime();
             const distance = countdownDate - now;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
 
             if (distance < 0) {
                 clearInterval(timer);
-                document.getElementById("countdown").innerHTML = "EVENT STARTED";
+                document.querySelector(".countdown-container").innerHTML = "<div class='number' style='font-size:3rem; padding: 10px 20px;'>EVENT STARTED</div>";
             }
         }, 1000);
 
-        // Unmute background music on user click
         document.addEventListener('click', () => {
             const audio = document.getElementById('bgMusic');
             audio.play();
