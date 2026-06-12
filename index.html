@@ -3,141 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Event Countdown</title>
+    <title>Guestbook</title>
     <style>
         body {
             background-color: rgb(12, 12, 12);
-            color: #ffffff;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            text-align: center;
-            padding-top: 60px;
-            margin: 0;
-            user-select: none;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
+
         h1 {
-            font-size: 2.3rem;
+            color: #ffffff;
+            font-size: 1.8rem;
+            text-align: center;
+            border-bottom: 2px dashed #333;
+            padding-bottom: 20px;
             margin-bottom: 40px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-        
-        .countdown-container {
-            display: inline-flex;
-            background-color: #0b0b0b;
-            padding: 20px 40px;
-            border-radius: 4px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.6);
-            gap: 15px;
-            align-items: center;
         }
 
-        .time-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 80px;
-        }
-
-        .number {
-            font-size: 4.5rem;
-            font-weight: 900;
-            color: #ffffff;
-            line-height: 1;
-            margin-bottom: 8px;
-            font-family: 'Impact', 'Arial Black', sans-serif;
-        }
-
-        /* The small muted labels underneath */
-        .label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            color: #888888;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .separator {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: #333333;
-            line-height: 1;
-            padding-bottom: 25px;
-            font-family: monospace;
-        }
-
-        .click-hint {
-            color: #ffffff;
-            font-size: 1rem;
-            margin-top: 35px;
-            opacity: 0.6;
-            font-style: italic;
+        /* Container to match your clean dark layout */
+        .guestbook-container {
+            background: #111111;
+            padding: 20px;
+            border: 1px solid #222222;
         }
     </style>
 </head>
 <body>
 
-    <h1>Gaming Cinematic Universe deletion live event countdown:</h1>
-    
-    <div class="countdown-container">
-        <div class="time-box">
-            <div class="number" id="days">0</div>
-            <div class="label">Days</div>
-        </div>
-        <div class="separator">:</div>
-        <div class="time-box">
-            <div class="number" id="hours">00</div>
-            <div class="label">Hours</div>
-        </div>
-        <div class="separator">:</div>
-        <div class="time-box">
-            <div class="number" id="minutes">00</div>
-            <div class="label">Minutes</div>
-        </div>
-        <div class="separator">:</div>
-        <div class="time-box">
-            <div class="number" id="seconds">00</div>
-            <div class="label">Seconds</div>
+    <h1>WELCOME TO THE GUESTBOOK</h1>
+
+    <div class="guestbook-container">
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="9f7be0b4-eb4b-4b20-94a4-569df464ee8b"
+          data-page-id="guestbook_main"
+          data-page-url="https://spoonful926.github.io/joke/"
+          data-page-title="Guestbook"
+          data-theme="dark">
         </div>
     </div>
 
-    <div class="click-hint">(click for audio)</div>
-
-    <audio id="bgMusic" autoplay loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        const countdownDate = new Date(2026, 5, 13, 21, 33, 0).getTime(); 
-
-        const timer = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-
-            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            hours = hours < 10 ? "0" + hours : hours;
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            document.getElementById("days").innerHTML = days;
-            document.getElementById("hours").innerHTML = hours;
-            document.getElementById("minutes").innerHTML = minutes;
-            document.getElementById("seconds").innerHTML = seconds;
-
-            if (distance < 0) {
-                clearInterval(timer);
-                document.querySelector(".countdown-container").innerHTML = "<div class='number' style='font-size:3rem; padding: 10px 20px;'>EVENT STARTED</div>";
-            }
-        }, 1000);
-
-        document.addEventListener('click', () => {
-            const audio = document.getElementById('bgMusic');
-            audio.play();
-        }, { once: true });
-    </script>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 
 </body>
 </html>
