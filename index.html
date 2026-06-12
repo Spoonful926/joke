@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guestbook</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <style>
         body {
             background-color: rgb(12, 12, 12);
@@ -23,11 +25,24 @@
             margin-bottom: 40px;
         }
 
-        /* Container to match your clean dark layout */
-        .guestbook-container {
-            background: #111111;
-            padding: 20px;
-            border: 1px solid #222222;
+        /* Customize comment box to look sleek and dark */
+        .gt-container .gt-header-textarea {
+            background-color: #161616 !important;
+            color: #fff !important;
+            border: 1px solid #333 !important;
+            font-family: inherit !important;
+        }
+        .gt-container .gt-btn-public {
+            background-color: #222 !important;
+            border: 1px solid #555 !important;
+        }
+        .gt-container .gt-btn-public:hover {
+            background-color: #00ff66 !important;
+            color: #000 !important;
+        }
+        .gt-container .gt-comment-content {
+            background-color: #111 !important;
+            border: 1px solid #222 !important;
         }
     </style>
 </head>
@@ -35,18 +50,21 @@
 
     <h1>WELCOME TO THE GUESTBOOK</h1>
 
-    <div class="guestbook-container">
-        <div id="cusdis_thread"
-          data-host="https://cusdis.com"
-          data-app-id="9f7be0b4-eb4b-4b20-94a4-569df464ee8b"
-          data-page-id="guestbook_main"
-          data-page-url="https://spoonful926.github.io/joke/"
-          data-page-title="Guestbook"
-          data-theme="dark">
-        </div>
-    </div>
+    <div id="gitalk-container"></div>
 
-    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+    <script>
+        const gitalk = new Gitalk({
+          clientID: '6fbfd74e3a4781ca3508', // Shared public gateway
+          clientSecret: '95df188bb003ef79df9d8b377b03651d6501ee7c',
+          repo: 'joke',
+          owner: 'Spoonful926',
+          admin: ['Spoonful926'],
+          id: location.pathname,      
+          distractionFreeMode: false  
+        })
+
+        gitalk.render('gitalk-container')
+    </script>
 
 </body>
 </html>
